@@ -1,0 +1,12 @@
+.body {
+    background-color: #f3f6fd;
+    width: 100%;
+    display: flex;
+}
+
+.containerOne {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
