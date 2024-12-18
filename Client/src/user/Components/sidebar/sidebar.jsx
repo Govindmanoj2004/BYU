@@ -137,17 +137,23 @@ const Sidebar = () => {
               <span className='sidebar-listItemText'>Settings</span>
             </a>
           </li>
-          <li className='sidebar-listItem'>
-            <a>
+          <li
+            className={`sidebar-listItem${
+              isActive('/report') ? ' active' : ''
+            }`}
+          >
+            <Link to='/report'>
               <ReportGmailerrorredOutlinedIcon className='sidebar-listIcon' />
               <span className='sidebar-listItemText'>Report</span>
-            </a>
+            </Link>
           </li>
-          <li className='sidebar-listItem'>
-            <a>
+          <li
+            className={`sidebar-listItem${isActive('/help') ? ' active' : ''}`}
+          >
+            <Link to='/help'>
               <QuestionMarkOutlinedIcon className='sidebar-listIcon' />
               <span className='sidebar-listItemText'>Help</span>
-            </a>
+            </Link>
           </li>
         </ul>
         <div className='sidebar-profileSection'>
