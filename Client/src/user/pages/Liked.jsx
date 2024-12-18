@@ -2,7 +2,7 @@ import React from 'react';
 import Cell from '../Components/List/Cell';
 import Style from './Page.module.css';
 
-const History = () => {
+const Liked = () => {
   return (
     <div className={Style.list}>
       <Cell />
@@ -14,4 +14,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default Liked;

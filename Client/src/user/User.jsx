@@ -13,7 +13,9 @@ export const User = () => {
         <div>
           <Navbar />
         </div>
-        <RouterUser />
+        <div className={Style.subContainer}>
+          <RouterUser />
+        </div>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Thumbnail from '../../../assets/luffy.jpg';
+import Thumbnail from '../../../assets/image.jpg';
 import Luffy from '../../../assets/luffy.jpg';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({

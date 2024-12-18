@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import React, { useState } from 'react';
-
 import Styles from './Home.module.css';
 import Video from '../Video/Video';
 import Livechat from '../Livechat/Livechat';

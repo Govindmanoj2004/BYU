@@ -10,3 +10,7 @@
     width: 100%;
 }
 
+.subContainer {
+    overflow-y: scroll;
+    height: 85vh;
+}

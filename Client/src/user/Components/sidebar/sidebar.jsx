@@ -8,12 +8,13 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import IconButton from '@mui/material/IconButton';
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
 import QuestionMarkOutlinedIcon from '@mui/icons-material/QuestionMarkOutlined';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router-dom';
 const { useState } = React;
 
 const Sidebar = () => {
   const [isShrinkView, setIsShrinkView] = React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const location = useLocation();
 
   const handleSidebarView = () => {
     setIsShrinkView(!isShrinkView);
@@ -30,6 +31,7 @@ const Sidebar = () => {
   const handleMouseLeave = () => {
     setIsShrinkView(true);
   };
+  const isActive = path => location.pathname === path;
 
   return (
     <div
@@ -37,28 +39,6 @@ const Sidebar = () => {
       onMouseLeave={handleMouseLeave}
       className={`sidebar-container${isShrinkView ? ' shrink' : ''}`}
     >
-      {/* <button
-        className='sidebar-viewButton'
-        type='button'
-        aria-label={isShrinkView ? 'Expand Sidebar' : 'Shrink Sidebar'}
-        title={isShrinkView ? 'Expand' : 'Shrink'}
-        onClick={handleSidebarView}
-      >
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='24'
-          height='24'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          className='feather feather-chevron-left'
-        >
-          <polyline points='15 18 9 12 15 6' />
-        </svg>
-      </button> */}
       <div className='sidebar-wrapper'>
         <div className='sidebar-themeContainer'>
           <label
@@ -109,14 +89,18 @@ const Sidebar = () => {
           </label>
         </div>
         <ul className='sidebar-list'>
-          <li className='sidebar-listItem active'>
-            <a>
+          <li className={`sidebar-listItem${isActive('/') ? ' active' : ''}`}>
+            <Link to='/' className='sidebar-listLink'>
               <HomeIcon className='sidebar-listIcon' />
               <span className='sidebar-listItemText'>Home</span>
-            </a>
+            </Link>
           </li>
-          <li className='sidebar-listItem'>
-            <Link  to='/history'>
+          <li
+            className={`sidebar-listItem${
+              isActive('/history') ? ' active' : ''
+            }`}
+          >
+            <Link to='/history'>
               <HistoryIcon className='sidebar-listIcon' />
               <span className='sidebar-listItemText'>History</span>
             </Link>
@@ -127,11 +111,13 @@ const Sidebar = () => {
               <span className='sidebar-listItemText'>Playlist</span>
             </a>
           </li>
-          <li className='sidebar-listItem'>
-            <a>
+          <li
+            className={`sidebar-listItem${isActive('/liked') ? ' active' : ''}`}
+          >
+            <Link to='/liked' className=''>
               <ThumbUpOffAltIcon className='sidebar-listIcon' />
               <span className='sidebar-listItemText'>Liked Videos</span>
-            </a>
+            </Link>
           </li>
           <li className='sidebar-listItem'>
             <a>
