@@ -10,6 +10,14 @@ const Liked = () => {
       <Cell />
       <Cell />
       <Cell />
+      <Cell />
+      <Cell />
+      <Cell />
+      <Cell />
+      <Cell />
+      <Cell />
+      <Cell />
+      <Cell />
     </div>
   );
 };

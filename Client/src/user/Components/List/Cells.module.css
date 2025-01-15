@@ -59,12 +59,11 @@ img {
 }
 
 .description {
-    height: auto;
+    height: 45px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
     -webkit-line-clamp: 2;
-    /* Number of lines to display */
     width: 270px;
     font-size: 13px;
     padding: 5px;

@@ -148,11 +148,11 @@ const Sidebar = () => {
             </Link>
           </li>
           <li
-            className={`sidebar-listItem${isActive('/help') ? ' active' : ''}`}
+            className={`sidebar-listItem${isActive('/about') ? ' active' : ''}`}
           >
-            <Link to='/help'>
+            <Link to='/about'>
               <QuestionMarkOutlinedIcon className='sidebar-listIcon' />
-              <span className='sidebar-listItemText'>Help</span>
+              <span className='sidebar-listItemText'>About</span>
             </Link>
           </li>
         </ul>

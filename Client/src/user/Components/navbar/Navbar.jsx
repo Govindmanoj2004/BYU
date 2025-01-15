@@ -13,7 +13,7 @@ export const Navbar = () => {
         <h2>BYU</h2>
       </div>
       <div className='links'>
-        <div className='search'>
+        {/* <div className='search'>
           <input type='text' placeholder='Search' />
           <SearchOutlinedIcon
             sx={{
@@ -24,9 +24,10 @@ export const Navbar = () => {
               translate: '0 -50%',
               width: '20px',
               height: '20px',
+              marginRight: '10px',
             }}
           />
-        </div>
+        </div> */}
         <Badge badgeContent={4} color='primary'>
           <NotificationsActiveOutlinedIcon sx={{ color: 'black' }} />
         </Badge>

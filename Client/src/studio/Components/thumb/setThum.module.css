@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 20px;
+}
+
+.local,
+.gen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed rgba(0, 0, 0, 0.1);
+    height: 100px;
+    width: 200px;
+}

@@ -4,7 +4,7 @@ import Home from './Components/Home/Home';
 import History from './pages/History';
 import Liked from './pages/Liked';
 import Report from './pages/Report';
-import Help from './pages/Help';
+import About from './pages/About';
 
 const RouterUser = () => {
   return (
@@ -13,7 +13,8 @@ const RouterUser = () => {
       <Route path='/history' element={<History />} />
       <Route path='/liked' element={<Liked />} />
       <Route path='/report' element={<Report />} />
-      <Route path='/help' element={<Help />} />
+      <Route path='/about' element={<About />} />
+      <Route path='*' element={<Home />} />
     </Routes>
   );
 };

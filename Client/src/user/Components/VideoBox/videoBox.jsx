@@ -43,7 +43,7 @@ export const VideoBox = ({ setOpen }) => {
     <div className='Container' onClick={() => setOpen(true)}>
       <div className='card-list'>
         <article className='card'>
-          <figure className='card-image'>
+          <figure className='card-imageCar'>
             <img
               src={Thumbnail}
               alt='An orange painted blue, cut in half laying on a blue background'
