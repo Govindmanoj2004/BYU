@@ -1,8 +1,9 @@
 import { Box, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import style from './setThum.module.css';
 import ComputerIcon from '@mui/icons-material/Computer';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import DoneIcon from '@mui/icons-material/Done';
 import { styled } from '@mui/material/styles';
 
 const VisuallyHiddenInput = styled('input')({
@@ -16,18 +17,31 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
-const setThumb = () => {
+
+const SetThumb = () => {
+  const [fileSelected, setFileSelected] = useState(false);
+
+  const handleFileChange = event => {
+    if (event.target.files.length > 0) {
+      setFileSelected(true);
+    }
+  };
+
   return (
     <Box className={style.container}>
-      <Box className={style.local} component='label'>
-        <VisuallyHiddenInput
-          type='file'
-          onChange={event => console.log(event.target.files)}
-          multiple
-        />
-        <ComputerIcon sx={{ color: '#1976d2', fontSize: '40px' }} />
+      <Box
+        className={style.local}
+        component='label'
+        sx={{ borderColor: fileSelected ? '#1976d2' : 'rgba(0, 0, 0, 0.1)' }}
+      >
+        <VisuallyHiddenInput type='file' onChange={handleFileChange} multiple />
+        {fileSelected ? (
+          <DoneIcon sx={{ color: '#1976d2', fontSize: '40px' }} />
+        ) : (
+          <ComputerIcon sx={{ color: '#1976d2', fontSize: '40px' }} />
+        )}
         <Typography sx={{ marginTop: '10px', fontSize: '12px' }}>
-          Upload file
+          {fileSelected ? 'Selected' : 'Upload file'}
         </Typography>
       </Box>
       <Box className={style.gen}>
@@ -40,4 +54,4 @@ const setThumb = () => {
   );
 };
 
-export default setThumb;
+export default SetThumb;

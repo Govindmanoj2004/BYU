@@ -1,19 +1,18 @@
 import React from 'react';
 import Sidebar from './Components/sidebar/sidebar';
 import RouterStudio from './RouterStudio';
+import { Box } from '@mui/material';
 import Style from './Studio.module.css';
-import QuickUpload from './Components/upload/QuickUpload';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 const Studio = () => {
   return (
     <div className={Style.main}>
-      <Sidebar />
-      <div className={Style.container}>
+      <Box className={Style.container} sx={{ flex: 1 }}>
         <RouterStudio />
-        {/* Passing Arguments */}
-        <QuickUpload RemoveRedEyeIcon={RemoveRedEyeIcon} />
-      </div>
+      </Box>
+      <Box className={Style.sidebar}>
+        <Sidebar />
+      </Box>
     </div>
   );
 };

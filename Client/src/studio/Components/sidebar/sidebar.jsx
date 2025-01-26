@@ -1,82 +1,157 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+  Home,
+  Analytics,
+  LiveTv,
+  AttachMoney,
+  Settings,
+  Report,
+  ExitToApp,
+} from '@mui/icons-material';
+import { motion } from 'framer-motion';
 import style from './sidebar.module.css';
-import LogoutIcon from '@mui/icons-material/Logout';
-import IconButton from '@mui/material/IconButton';
-import Avatar from '@mui/material/Avatar';
-import HomeIcon from '@mui/icons-material/Home';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
-import SettingsIcon from '@mui/icons-material/Settings';
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
-import MessageIcon from '@mui/icons-material/Message';
 
 const Sidebar = () => {
+  const [hovered, setHovered] = useState(null);
+
+  const handleMouseEnter = index => {
+    setHovered(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(null);
+  };
+
+  const handleNavigation = route => {
+    navigate(route);
+  };
+
   return (
-    <aside className={style.sidebar}>
-      <div className={style.left}>
-        <Avatar sx={{ bgcolor: '#1976d2' }} className={style.avatar}>
-          N
-        </Avatar>
-        <IconButton aria-label='More' sx={{ borderRadius: '50%' }}>
-          <LogoutIcon sx={{ marginLeft: 'auto', color: 'white' }} />
-        </IconButton>
-      </div>
-      <div className={style.right}>
-        <h1>BYU</h1>
-        <nav className={style.buttons}>
-          <button>
-            <i className={style.aiDashboard}>
-              <HomeIcon />
-            </i>
-            <span>Home</span>
-          </button>
-          <button>
-            <i className={style.aiPeopleMultiple}>
-              <PlayCircleOutlineIcon />
-            </i>
-            <span>Contents</span>
-          </button>
-          <button>
-            <i className={style.aiCreditCard}>
-              <SignalCellularAltIcon />
-            </i>
-            <span>Analytics</span>
-          </button>
-          <button>
-            <i className={style.aiCalendar}>
-              <AttachMoneyIcon />
-            </i>
-            <span>Earn</span>
-          </button>
-          <button>
-            <i className={style.aiStatisticUp}>
-              <MessageIcon />
-            </i>
-            <span>Meassages</span>
-          </button>
-          <button>
-            <i className={style.aiCheckBox}>
-              <AutoFixHighIcon />
-            </i>
-            <span>Customization</span>
-          </button>
-          <button>
-            <i className={style.aiSettingsVertical}>
-              <SettingsIcon />
-            </i>
-            <span>Settings</span>
-          </button>
-          <button>
-            <i className={style.aiTriangleAlert}>
-              <PriorityHighIcon />
-            </i>
-            <span>Alert</span>
-          </button>
-        </nav>
-      </div>
-    </aside>
+    <div className={style.bottomNav}>
+      {/* Left Items */}
+      <motion.div
+        className={style.navItem}
+        onMouseEnter={() => handleMouseEnter(1)}
+        onMouseLeave={handleMouseLeave}
+        whileHover={{
+          scale: 1.5,
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 20,
+            duration: 0.3,
+          },
+        }}
+      >
+        <Analytics />
+      </motion.div>
+
+      <motion.div
+        className={style.navItem}
+        onMouseEnter={() => handleMouseEnter(2)}
+        onMouseLeave={handleMouseLeave}
+        whileHover={{
+          scale: 1.5,
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 20,
+            duration: 0.3,
+          },
+        }}
+      >
+        <LiveTv />
+      </motion.div>
+
+      <motion.div
+        className={style.navItem}
+        onMouseEnter={() => handleMouseEnter(3)}
+        onMouseLeave={handleMouseLeave}
+        whileHover={{
+          scale: 1.5,
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 20,
+            duration: 0.3,
+          },
+        }}
+      >
+        <AttachMoney />
+      </motion.div>
+
+      {/* Center Home Button */}
+      <motion.div
+        className={style.navItem}
+        onMouseEnter={() => handleMouseEnter(0)}
+        onMouseLeave={handleMouseLeave}
+        whileHover={{
+          scale: 1.5,
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 20,
+            duration: 0.3,
+          },
+        }}
+        onClick={() => handleNavigation('/studio')}
+      >
+        <Home />
+      </motion.div>
+
+      {/* Right Items */}
+      <motion.div
+        className={style.navItem}
+        onMouseEnter={() => handleMouseEnter(4)}
+        onMouseLeave={handleMouseLeave}
+        whileHover={{
+          scale: 1.5,
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 20,
+            duration: 0.3,
+          },
+        }}
+      >
+        <Settings />
+      </motion.div>
+
+      <motion.div
+        className={style.navItem}
+        onMouseEnter={() => handleMouseEnter(5)}
+        onMouseLeave={handleMouseLeave}
+        whileHover={{
+          scale: 1.5,
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 20,
+            duration: 0.3,
+          },
+        }}
+      >
+        <Report />
+      </motion.div>
+
+      <motion.div
+        className={style.navItem}
+        onMouseEnter={() => handleMouseEnter(6)}
+        onMouseLeave={handleMouseLeave}
+        whileHover={{
+          scale: 1.5,
+          color: 'rgba(255, 0, 0, 1)',
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 20,
+            duration: 0.3,
+          },
+        }}
+      >
+        <ExitToApp className={style.logout} />
+      </motion.div>
+    </div>
   );
 };
 

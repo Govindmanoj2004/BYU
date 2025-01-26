@@ -4,21 +4,21 @@ import style from './QuickUpload.module.css';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Progress from './../progress/progress';
-import { CardOverflow } from '@mui/joy';
 import VDetails from '../VDetails/VDetails';
+import VideoForm from './../videoForm/videoForm';
+import Preview from '../Preview/Preview';
 
 const styleModal = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper', // Material-UI specific
+  bgcolor: 'background.paper',
   boxShadow: 24,
   p: 3,
-  height: 'auto', // Increased height
-  width: '50%', // Optional: Adjust this if necessary
+  height: 'auto',
+  width: '50%',
   borderRadius: '20px',
 };
 
@@ -90,11 +90,9 @@ const QuickUpload = ({ RemoveRedEyeIcon }) => {
             onClose={handleClose}
             aria-labelledby='modal-modal-title'
             aria-describedby='modal-modal-description'
+            sx={{ borderRadius: '20px', border: 'none' }}
           >
             <Box sx={styleModal}>
-              <Typography id='modal-modal-title' variant='h6' component='h2'>
-                Text in a modal
-              </Typography>
               <Progress
                 activeStep={activeStep}
                 handleReset={handleReset}
@@ -106,6 +104,8 @@ const QuickUpload = ({ RemoveRedEyeIcon }) => {
               />
               <Box className={style.scroll}>
                 {activeStep === 0 && <VDetails />}
+                {activeStep === 1 && <VideoForm />}
+                {activeStep === 2 && <Preview />}
               </Box>
             </Box>
           </Modal>

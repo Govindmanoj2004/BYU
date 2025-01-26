@@ -1,0 +1,48 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+:root {
+    --red: #EF5350;
+}
+
+.container {
+    font-family: "Lato", Arial;
+    color: #263238;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 600px;
+    height: 100px;
+    background: white;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.block {
+    text-align: center;
+    height: 100%;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.block:hover {
+    color: #1976d2;
+}
+
+.number {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.string {
+    font-size: 12px;
+    line-height: 18px;
+    opacity: 0.4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

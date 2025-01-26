@@ -72,73 +72,96 @@ const InnerTextareaDes = React.forwardRef(function InnerTextareaDes(
 });
 const VDetails = () => {
   return (
-    <Box sx={{ width: '100%' }}>
-      <Typography
-        sx={{ marginBottom: '5px', fontWeight: 'bold', fontSize: '20px' }}
-      >
-        Details
-      </Typography>
-      <Typography
+    <Box>
+      <Box
         sx={{
-          marginBottom: '10px',
-          fontWeight: 'bold',
-          fontSize: '12px',
-          color: 'gray',
+          padding: '20px',
+          border: '1px solid #e0e0e0',
+          borderRadius: '8px',
+          marginBottom: '15px',
         }}
       >
-        Add a title and description to your video...!
-      </Typography>
-      {/* Title */}
-      <Textarea
-        slots={{ textarea: InnerTextarea }}
-        slotProps={{ textarea: { placeholder: 'Video Title' } }}
-        sx={{ borderRadius: '6px', marginBottom: '10px' }}
-      />
-      <Textarea
-        slots={{ textarea: InnerTextareaDes }}
-        slotProps={{
-          textarea: { placeholder: 'Tell viewers about your video.' },
-        }}
-        sx={{ borderRadius: '6px', height: '130px' }}
-      />
-      <Box sx={{ marginTop: '20px' }}>
         <Typography
-          sx={{ marginBottom: '5px', fontWeight: 'bold', fontSize: '20px' }}
+          sx={{ marginBottom: '5px', fontWeight: 'bold', fontSize: '1.25rem' }}
         >
-          Thumbnail
+          Video Details: Title, Description, and More
+        </Typography>
+        <Typography
+          sx={{
+            marginBottom: '15px',
+            fontWeight: '400',
+            fontSize: '0.875rem',
+            color: 'gray',
+            marginBottom: '15px',
+          }}
+        >
+          Provide essential information about your video to help viewers
+          understand its content and engage effectively.
+        </Typography>
+        {/* Title */}
+        <Textarea
+          slots={{ textarea: InnerTextarea }}
+          slotProps={{ textarea: { placeholder: 'Video Title' } }}
+          sx={{ borderRadius: '6px', marginBottom: '10px' }}
+        />
+        <Textarea
+          slots={{ textarea: InnerTextareaDes }}
+          slotProps={{
+            textarea: { placeholder: 'Tell viewers about your video.' },
+          }}
+          sx={{ borderRadius: '6px', height: '130px' }}
+        />
+      </Box>
+      <Box
+        sx={{
+          padding: '20px',
+          border: '1px solid #e0e0e0',
+          borderRadius: '8px',
+          marginBottom: '15px',
+        }}
+      >
+        <Typography
+          sx={{ marginBottom: '5px', fontWeight: 'bold', fontSize: '1.25rem' }}
+        >
+          Thumbnail: Choose an Eye-Catching Image
         </Typography>
         <Typography
           sx={{
             marginBottom: '10px',
-            fontWeight: 'bold',
-            fontSize: '12px',
+            fontWeight: '400',
+            fontSize: '0.875rem',
             color: 'gray',
           }}
         >
-          Set the thumbnail thats stands out and draws viewers attention..!
+          Choose an eye-catching thumbnail that best represents your video and
+          attracts viewers.
         </Typography>
         <Thumb />
       </Box>
-      <Box sx={{ marginTop: '20px' }}>
+      <Box
+        sx={{
+          padding: '20px',
+          border: '1px solid #e0e0e0',
+          borderRadius: '8px',
+        }}
+      >
         <Typography
-          sx={{ marginBottom: '5px', fontWeight: 'bold', fontSize: '20px' }}
+          sx={{ marginBottom: '5px', fontWeight: 'bold', fontSize: '1.25rem' }}
         >
-          Upload
+          Upload: Share Your Video with the World
         </Typography>
         <Typography
           sx={{
             marginBottom: '10px',
-            fontWeight: 'bold',
-            fontSize: '12px',
+            fontWeight: '400',
+            fontSize: '0.875rem',
             color: 'gray',
           }}
         >
-          Upload your video...!
+          Upload your video file to share it with your audience and make it
+          available for viewing.
         </Typography>
-        <Box>
-          {/* Edit */}
-          <VideoUpload />
-        </Box>
+        <VideoUpload />
       </Box>
     </Box>
   );
