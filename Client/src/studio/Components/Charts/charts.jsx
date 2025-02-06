@@ -1,57 +1,109 @@
-import * as React from 'react';
-import { LineChart } from '@mui/x-charts';
-import { Box } from '@mui/material';
+import React, { useEffect, useRef } from 'react';
+import Chart from 'chart.js/auto';
+import styles from './charts.module.css';
 
-export default function StatsLineChart() {
+const Charts = () => {
+  const chartRef = useRef(null); // Create a ref for the canvas element
+
+  useEffect(() => {
+    // Destroy any previous chart before creating a new one
+    if (chartRef.current && chartRef.current.chartInstance) {
+      chartRef.current.chartInstance.destroy();
+    }
+
+    const ctx = chartRef.current; // Get the canvas DOM element
+    const chartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
+        datasets: [
+          {
+            label: 'Revenue (million [$])',
+            data: [
+              5.2, 7.8, 12.3, 11.2, 11.5, 28.8, 35.5, 40, 42.5, 45.5, 50.5, 60,
+            ],
+            backgroundColor: '#1976d3',
+            borderRadius: 6,
+            borderSkipped: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+          title: {
+            display: true,
+            text: 'Viewership in 2025',
+            padding: {
+              bottom: 16,
+            },
+            font: {
+              size: 16,
+              weight: 'normal',
+            },
+          },
+          tooltip: {
+            backgroundColor: '#27292D',
+          },
+        },
+        scales: {
+          x: {
+            // Remove grid and border properties
+            grid: {
+              display: false, // Hide grid lines
+            },
+            title: {
+              text: '2023',
+            },
+          },
+          y: {
+            // Remove grid and border properties
+            grid: {
+              display: false, // Hide grid lines
+            },
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Viewer Count',
+            },
+          },
+        },
+      },
+    });
+
+    // Save the chart instance to the canvas element for later destruction if needed
+    chartRef.current.chartInstance = chartInstance;
+
+    // Cleanup the chart when the component unmounts
+    return () => {
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+    };
+  }, []);
+
   return (
-    <Box
-      sx={{
-        boxShadow:
-          'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px',
-        borderRadius: '15px',
-        padding: '20px',
-      }}
-    >
-      <LineChart
-        xAxis={[
-          {
-            data: [1, 2, 3, 5, 8, 10], // X-axis data points (time, e.g., months, days, etc.)
-            showLabel: false, // Hide axis labels
-          },
-        ]}
-        series={[
-          {
-            data: [120, 150, 180, 220, 300, 400], // Demo data for average views
-            label: 'Views',
-            color: '#007FFF', // Blue color for views
-            point: { shape: 'circle', size: 8 }, // Circle shape for data points
-          },
-          {
-            data: [30, 50, 80, 100, 150, 200], // Demo data for average likes
-            label: 'Likes',
-            color: '#00BFA5', // Green color for likes
-            point: { shape: 'circle', size: 8 }, // Circle shape for data points
-          },
-          {
-            data: [10, 15, 25, 35, 50, 65], // Demo data for average subscriptions
-            label: 'Subscriptions',
-            color: '#FF4081', // Pink color for subscriptions
-            point: { shape: 'circle', size: 8 }, // Circle shape for data points
-          },
-        ]}
-        width={500}
-        height={300}
-        margin={{
-          top: 70, // Space between the chart and the top label
-          bottom: 30, // Space between the chart and the bottom labels
-          left: 30, // Space between the chart and the left axis labels
-          right: 20, // Space between the chart and the right edge
-        }}
-        tooltip={{
-          // Enable tooltip on hover
-          show: true,
-        }}
-      />
-    </Box>
+    <div className={styles.widget}>
+      <canvas ref={chartRef} id='revenues'></canvas> {/* Use the ref here */}
+    </div>
   );
-}
+};
+
+export default Charts;

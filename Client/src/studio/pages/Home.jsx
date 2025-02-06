@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import QuickUpload from './../Components/upload/QuickUpload';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import Charts from './../Components/Charts/charts';
 import Comp from './../Components/Card/card';
 import { Box } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -43,7 +42,6 @@ const Home = () => {
         scrollbarWidth: 'none',
       }}
     >
-      {/* //chart Area */}
       <motion.div
         style={{
           ...fadeInStyle,
@@ -56,11 +54,9 @@ const Home = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        {/* <Charts /> */}
         <Comp />
       </motion.div>
 
-      {/* Quick upload area */}
       <Box
         sx={{
           display: 'flex',

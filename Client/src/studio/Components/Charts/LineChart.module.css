@@ -1,0 +1,16 @@
+:root {
+    --background: #070707;
+    --background-widget: #ffffff;
+    --primary: #3DA06E;
+}
+
+.widget {
+    border-radius: 0.75rem;
+    background-color: var(--background-widget);
+    padding: 1rem;
+    max-width: 40rem;
+    width: 100%;
+    min-width: 20rem;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 20px;
+}

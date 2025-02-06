@@ -22,8 +22,14 @@ const Sidebar = () => {
     setHovered(null);
   };
 
+  //For navigation between pages
+
   const handleNavigation = route => {
     navigate(route);
+  };
+
+  const navigate = route => {
+    window.location.href = route;
   };
 
   return (
@@ -43,7 +49,7 @@ const Sidebar = () => {
           },
         }}
       >
-        <Analytics />
+        <Analytics onClick={() => handleNavigation('/studio/analytics')} />
       </motion.div>
 
       <motion.div
