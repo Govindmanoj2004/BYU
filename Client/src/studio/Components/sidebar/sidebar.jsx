@@ -3,13 +3,13 @@ import {
   Home,
   Analytics,
   LiveTv,
-  AttachMoney,
   Settings,
   Report,
   ExitToApp,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import style from './sidebar.module.css';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Sidebar = () => {
   const [hovered, setHovered] = useState(null);
@@ -83,7 +83,7 @@ const Sidebar = () => {
           },
         }}
       >
-        <AttachMoney />
+        <PersonIcon onClick={() => handleNavigation('/studio/profile')} />
       </motion.div>
 
       {/* Center Home Button */}
