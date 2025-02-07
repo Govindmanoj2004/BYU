@@ -3,6 +3,7 @@ import Profile from '../Components/Profile/profile';
 import Status from '../Components/Status/Status';
 import { Box } from '@mui/material';
 import Alert from '../Components/Alert/alert';
+import Comp from './../Components/Card/card';
 
 const MyProfile = () => {
   return (
@@ -20,10 +21,13 @@ const MyProfile = () => {
           sx={{
             display: 'flex',
             width: '100%',
-            height: '%0%',
+            height: '380px',
             flexDirection: 'row',
             padding: '10px',
             gap: '10px',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            padding: '10px',
           }}
         >
           <Profile />
@@ -33,10 +37,11 @@ const MyProfile = () => {
             display: 'flex',
             width: '100%',
             height: '50%',
-            flexDirection: 'row',
+            flexDirection: 'column',
             padding: '10px',
           }}
         >
+          <Comp />
           <Status />
         </Box>
       </Box>

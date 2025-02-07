@@ -10,6 +10,9 @@ import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from 'react';
+import { Typography } from '@mui/material';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { Box, Divider } from '@mui/material';
 
 export default function Alert() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -32,6 +35,28 @@ export default function Alert() {
         alignItems: 'center',
       }}
     >
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1,
+          mb: 1,
+          p: 1,
+          borderRadius: 2,
+          bgcolor: 'rgba(25, 118, 210, 0.05)', // Subtle blue background
+        }}
+      >
+        <MailOutlineIcon sx={{ color: '#1976d2', fontSize: 26 }} />
+        <Typography
+          variant='subtitle1'
+          fontWeight={600}
+          color='primary'
+          sx={{ cursor: 'pointer' }}
+        >
+          Notifications
+        </Typography>
+      </Box>
+      <Divider sx={{ mb: 1 }} /> {/* Added Divider */}
       <motion.div
         whileHover={{
           scale: 1.05,
@@ -50,7 +75,6 @@ export default function Alert() {
           />
         </ListItem>
       </motion.div>
-
       <motion.div
         whileHover={{
           scale: 1.05,
@@ -69,7 +93,6 @@ export default function Alert() {
           />
         </ListItem>
       </motion.div>
-
       <motion.div
         whileHover={{
           scale: 1.05,
@@ -88,7 +111,6 @@ export default function Alert() {
           />
         </ListItem>
       </motion.div>
-
       <motion.div
         initial={{ height: 0, opacity: 0 }}
         animate={{
@@ -97,11 +119,15 @@ export default function Alert() {
         }}
         exit={{ height: 0, opacity: 0 }}
         transition={{
-          duration: 0.8,
+          duration: 0.3,
           ease: 'easeInOut',
         }}
         style={{
           overflow: 'hidden',
+        }}
+        whileHover={{
+          scale: 1.05,
+          transition: { duration: 0.3, ease: 'easeOut' },
         }}
       >
         {isExpanded && (
@@ -118,7 +144,6 @@ export default function Alert() {
           </ListItem>
         )}
       </motion.div>
-
       <motion.div
         whileHover={{
           scale: 1.1,
@@ -134,7 +159,9 @@ export default function Alert() {
           }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          <KeyboardArrowDownIcon sx={{ color: '#1976d2', fontSize: '25px' }} />
+          <KeyboardArrowDownIcon
+            sx={{ color: '#1976d2', fontSize: '25px', cursor: 'pointer' }}
+          />
         </motion.div>
       </motion.div>
     </List>
