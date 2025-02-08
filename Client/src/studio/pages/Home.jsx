@@ -4,6 +4,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Comp from './../Components/Card/card';
 import { Box } from '@mui/material';
 import { motion } from 'framer-motion';
+import Wifi from '../Components/Wifi/Wifi';
 
 const Home = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -49,12 +50,14 @@ const Home = () => {
           justifyContent: 'center',
           alignItems: 'center',
           height: '300px',
+          gap:' 20px'
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         <Comp />
+        <Wifi />
       </motion.div>
 
       <Box
