@@ -35,11 +35,8 @@ const Weather = () => {
   };
 
   return (
-    <motion.div 
-      className={style.weather__container} 
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
+    <div 
+      className={style.weather__container}
     >
       <div className={style.units__toggle}>
         <button onClick={toggleUnit} className={unit === "C" ? style.active : ""}>C</button>
@@ -76,7 +73,7 @@ const Weather = () => {
           onChange={(e) => setCity(e.target.value)}
         />
       </div>
-    </motion.div>
+    </div>
   );
 };
 
