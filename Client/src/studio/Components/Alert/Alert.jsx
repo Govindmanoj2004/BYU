@@ -145,6 +145,39 @@ export default function Alert() {
         )}
       </motion.div>
       <motion.div
+        initial={{ height: 0, opacity: 0 }}
+        animate={{
+          height: isExpanded ? 'auto' : 0,
+          opacity: isExpanded ? 1 : 0,
+        }}
+        exit={{ height: 0, opacity: 0 }}
+        transition={{
+          duration: 0.3,
+          ease: 'easeInOut',
+        }}
+        style={{
+          overflow: 'hidden',
+        }}
+        whileHover={{
+          scale: 1.05,
+          transition: { duration: 0.3, ease: 'easeOut' },
+        }}
+      >
+        {isExpanded && (
+          <ListItem sx={{ borderRadius: 2, mb: 1, bgcolor: '#F5F5F5' }}>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: '#4CAF50' }}>
+                <CheckCircleIcon sx={{ color: 'white' }} />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary='2 more complaints are received for your video.'
+              secondary='Feb 5, 2025'
+            />
+          </ListItem>
+        )}
+      </motion.div>
+      <motion.div
         whileHover={{
           scale: 1.1,
           transition: { duration: 0.2, ease: 'easeOut' },

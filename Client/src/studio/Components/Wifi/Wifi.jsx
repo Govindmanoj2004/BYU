@@ -27,39 +27,43 @@ const Wifi = () => {
 
     setPing(latency + " ms");
 
-    // Set color based on latency
     if (latency < 50) {
-      setColor("#4CAF50"); // Green (Good)
-    } else if (latency < 150) {
-      setColor("#FFC107"); // Yellow (Moderate)
+      setColor("#4CAF50");
+    } else if (latency >= 50 && latency < 150) {
+      setColor("#FFC107");
+    } else if (latency >= 150 && latency < 300) {
+      setColor("#FF9800");
     } else {
-      setColor("#F44336"); // Red (Poor)
+      setColor("#F44336"); 
     }
   };
-
+  // Update every 5s
   useEffect(() => {
     measurePing();
-    const interval = setInterval(measurePing, 5000); // Update every 5s
+    const interval = setInterval(measurePing, 5000); 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <Card
       sx={{
-        width: 250,
+        width: "320px",
+        height: "340px",
         borderRadius: 4,
         boxShadow:
           "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
         textAlign: "center",
         padding: 2,
         bgcolor: "#ffff",
+        display: "flex",
+        justifyContent: "space-around",
       }}
     >
       <CardContent>
         <Typography variant="h6" fontWeight="bold" color={color} gutterBottom>
           Ping: {ping || "Measuring..."}
         </Typography>
-        <Box display="flex" justifyContent="center" mt={1}>
+        <Box display="flex" justifyContent="center" mt={1} flexDirection="column" alignItems="center" padding="10px">
           <svg viewBox="0 0 100 100" width="200" height="150">
             <circle cx="50" cy="85" r="5" fill={color} />
             {arcs.map(({ radius, delay }, index) => {

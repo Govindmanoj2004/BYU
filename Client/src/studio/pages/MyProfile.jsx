@@ -4,6 +4,9 @@ import Status from '../Components/Status/Status';
 import { Box } from '@mui/material';
 import Alert from '../Components/Alert/alert';
 import Comp from './../Components/Card/card';
+import Weather from '../Components/Weather/Weather';
+import Wifi from '../Components/Wifi/Wifi';
+
 
 const MyProfile = () => {
   return (
@@ -25,13 +28,16 @@ const MyProfile = () => {
             flexDirection: 'row',
             padding: '10px',
             gap: '10px',
-            justifyContent: 'flex-start',
+            justifyContent: 'space-evenly',
             alignItems: 'center',
             padding: '10px',
           }}
         >
           <Profile />
+          <Weather />
+          <Wifi />
         </Box>
+        {/* Sub  2 */}
         <Box
           sx={{
             display: 'flex',
@@ -39,6 +45,7 @@ const MyProfile = () => {
             height: '50%',
             flexDirection: 'column',
             padding: '10px',
+            alignItems:'center'
           }}
         >
           <Comp />

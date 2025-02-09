@@ -19,6 +19,7 @@
     "@mui/material": "^6.1.9",
     "@mui/x-charts": "^7.23.6",
     "@nextui-org/navbar": "^2.0.37",
+    "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "filepond": "^4.32.6",
     "filepond-plugin-file-encode": "^2.1.14",
