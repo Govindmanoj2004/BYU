@@ -4,12 +4,13 @@ import {
   Analytics,
   LiveTv,
   Settings,
-  Report,
   ExitToApp,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import style from './sidebar.module.css';
 import PersonIcon from '@mui/icons-material/Person';
+import InfoIcon from '@mui/icons-material/Info';
+
 
 const Sidebar = () => {
   const [hovered, setHovered] = useState(null);
@@ -137,7 +138,7 @@ const Sidebar = () => {
           },
         }}
       >
-        <Report />
+        <InfoIcon onClick={() => handleNavigation('/studio/about')} />
       </motion.div>
 
       <motion.div

@@ -13,9 +13,9 @@
     justify-content: flex-start;
     align-items: flex-start;
     height: 100%;
-    flex-grow: 1;
-    padding: 10px;
-    overflow: auto;
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
 }
 
 .sidebar {

@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import GraphPage from './pages/GraphPage';
 import MyProfile from './pages/MyProfile';
+import About from './pages/About';
 
 const RouterStudio = () => {
   return (
@@ -10,6 +11,7 @@ const RouterStudio = () => {
       <Route path='/' element={<Home />} />
       <Route path='/analytics' element={<GraphPage />} />
       <Route path='/profile' element={<MyProfile />} />
+      <Route path='/about' element={<About />} />
     </Routes>
   );
 };
