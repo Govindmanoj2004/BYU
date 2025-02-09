@@ -51,7 +51,7 @@ const Wifi = () => {
         height: "340px",
         borderRadius: 4,
         boxShadow:
-          "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+          "0 4px 15px rgba(0, 0, 0, 0.1)",
         textAlign: "center",
         padding: 2,
         bgcolor: "#ffff",
@@ -59,7 +59,11 @@ const Wifi = () => {
         justifyContent: "space-around",
       }}
     >
-      <CardContent>
+      <CardContent sx={{
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'space-evenly',
+      }}>
         <Typography variant="h6" fontWeight="bold" color={color} gutterBottom>
           Ping: {ping || "Measuring..."}
         </Typography>

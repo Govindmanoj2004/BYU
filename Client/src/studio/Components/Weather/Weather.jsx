@@ -1,16 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import style from "./Weather.module.css";
 
 const Weather = () => {
   const [unit, setUnit] = useState("C");
-  const [city, setCity] = useState("Tokyo");
-  const [temperature, setTemperature] = useState(23);
-  const [weather, setWeather] = useState("Clear Sky");
+  const [city, setCity] = useState("Kerala");
+  const [temperature, setTemperature] = useState(null);
+  const [weather, setWeather] = useState(null);
+
+  // Fetch weather data
+  useEffect(() => {
+    const apiKey = '9635c2f887704101bab63730250902'; // Your API key
+    const getWeatherData = async () => {
+      try {
+        const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`);
+        const data = await response.json();
+        setWeather(data.current.condition.text);
+        setTemperature(data.current.temp_c);
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    };
+
+    getWeatherData();
+  }, [city]);
 
   const toggleUnit = () => {
     setUnit(unit === "C" ? "F" : "C");
-    setTemperature(unit === "C" ? Math.round(temperature * 1.8 + 32) : Math.round((temperature - 32) / 1.8));
+    setTemperature((prevTemp) => 
+      unit === "C" 
+        ? Math.round(prevTemp * 1.8 + 32) 
+        : Math.round((prevTemp - 32) / 1.8)
+    );
   };
 
   return (
@@ -43,8 +64,8 @@ const Weather = () => {
       </motion.div>
       <div className={style.box1}>
         <div className={style.location__name}>{city}</div>
-        <div className={style.weather__condition}>{weather}</div>
-        <div className={style.current__temperature}>{temperature}°{unit}</div>
+        <div className={style.weather__condition}>{weather || 'Loading...'}</div>
+        <div className={style.current__temperature}>{temperature !== null ? `${temperature}°${unit}` : 'Loading...'}</div>
       </div>
       <div className={style.search__input}>
         <input 
