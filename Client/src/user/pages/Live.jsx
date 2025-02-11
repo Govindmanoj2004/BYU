@@ -27,7 +27,7 @@ import flv from "flv.js";
 
 const VideoPlayer = ({ streamKey }) => {
   const videoRef = useRef(null);
-  const [resolution, setResolution] = useState("Loading...");
+  const [resolution, setResolution] = useState("Starting soon...");
   const [isBehind, setIsBehind] = useState(false);
   let player = null;
 
@@ -48,12 +48,11 @@ const VideoPlayer = ({ streamKey }) => {
         setResolution(`${videoRef.current.videoWidth}x${videoRef.current.videoHeight}`);
       });
 
-      // Check if user is behind live position
+      // Check if the user is behind live
       const checkLiveStatus = () => {
-        if (videoRef.current.currentTime < videoRef.current.duration - 5) {
-          setIsBehind(true);
-        } else {
-          setIsBehind(false);
+        if (videoRef.current.seekable.length > 0) {
+          const liveEdge = videoRef.current.seekable.end(0);
+          setIsBehind(videoRef.current.currentTime < liveEdge - 3);
         }
       };
       videoRef.current.addEventListener("timeupdate", checkLiveStatus);
@@ -66,10 +65,15 @@ const VideoPlayer = ({ streamKey }) => {
     };
   }, [streamKey]);
 
-  // Jump to live position if behind
+  // Jump to the latest live position
   const jumpToLive = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = videoRef.current.duration;
+    console.log("Jump to live triggered");
+    if (videoRef.current && videoRef.current.seekable.length > 0) {
+      const liveEdge = videoRef.current.seekable.end(0);
+      console.log("Live edge:", liveEdge);
+      videoRef.current.currentTime = liveEdge;
+    } else {
+      console.log("Video ref or seekable range not available");
     }
   };
 
@@ -77,7 +81,7 @@ const VideoPlayer = ({ streamKey }) => {
     <div style={{ position: "relative", width: "100%", maxWidth: "800px" }}>
       {/* LIVE Badge (Clickable) */}
       <span
-        onClick={isBehind ? jumpToLive : null}
+        onClick={() => isBehind && jumpToLive()}
         style={{
           position: "absolute",
           top: 10,
@@ -116,4 +120,5 @@ const VideoPlayer = ({ streamKey }) => {
 };
 
 export default VideoPlayer;
+
 
