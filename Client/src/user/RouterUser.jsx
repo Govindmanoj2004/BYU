@@ -6,6 +6,7 @@ import Liked from './pages/Liked';
 import Report from './pages/Report';
 import About from './pages/About';
 import VideoPlayer from './pages/Live';
+import Luffy from './../assets/luffy.jpg'
 
 const RouterUser = () => {
   return (
@@ -16,7 +17,7 @@ const RouterUser = () => {
       <Route path='/report' element={<Report />} />
       <Route path='/about' element={<About />} />
       <Route path='*' element={<Home />} />
-      <Route path='/live' element={<VideoPlayer streamKey="stream123" />} />
+      <Route path='/live' element={<VideoPlayer streamKey="stream123" thumbnail={Luffy}/>} />
     </Routes>
   );
 };
