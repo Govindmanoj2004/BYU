@@ -7,18 +7,18 @@ import Navbar from './Components/navbar/Navbar';
 import { io } from "socket.io-client"
 
 //Socket
- const socket = io("http://localhost:3000");
+//  const socket = io("http://localhost:3000");
 export const User = () => {
-  useEffect(() => {
-    if (!socket) return
+  // useEffect(() => {
+  //   if (!socket) return
 
-    socket.emit("hello")
-    socket.on("hai", () => {
-      console.log('hellofjhghjghj');
+  //   socket.emit("hello")
+  //   socket.on("hai", () => {
+  //     console.log('hellofjhghjghj');
       
-    })
+  //   })
 
-  }, [socket])
+  // }, [socket])
 
 
   

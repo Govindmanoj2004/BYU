@@ -1,26 +1,23 @@
 const NodeMediaServer = require("node-media-server");
 const express = require("express");
-const { spawn } = require("child_process"); // Import child_process for FFmpeg
+const { spawn } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const { createServer } = require("http");
-const { Server } = require("socket.io");
 
 const app = express();
-const port = 3000; // API server port
+const port = 3000;
 const cors = require("cors");
 app.use(cors());
-
-// Middleware to parse JSON
 app.use(express.json());
 
-// Directory to save recorded videos
-const RECORD_DIR = path.join(__dirname, "recordings");
+// Directory to save recorded HLS streams
+const RECORD_DIR = path.join(__dirname, "hls_recordings");
 if (!fs.existsSync(RECORD_DIR)) {
   fs.mkdirSync(RECORD_DIR, { recursive: true });
 }
 
-// Node Media Server Configuration
+// Node Media Server Configuration (HLS enabled)
 const config = {
   rtmp: {
     port: 1935,
@@ -34,16 +31,14 @@ const config = {
     allow_origin: "*",
   },
   trans: {
-    ffmpeg: "/usr/bin/ffmpeg", // Adjust path if necessary
+    ffmpeg: "C:\ffmpeg\bin\ffmpeg.exeg", // Adjust this path if needed
     tasks: [
       {
-        app: "live", // This should match the RTMP application name
+        app: "live",
         ac: "aac",
         vc: "libx264",
-        hls: true,
+        hls: true, // ✅ Make sure HLS is enabled
         hlsFlags: "[hls_time=2:hls_list_size=4:hls_flags=delete_segments]",
-        dash: true,
-        dashFlags: "[f=dash:window_size=5:extra_window_size=5]",
       },
     ],
   },
@@ -55,9 +50,15 @@ nms.run();
 // Store active recordings
 const activeRecordings = {};
 
-// Function to start recording a stream
+// Function to start recording in HLS format
 const startRecording = (streamKey) => {
-  const filePath = path.join(RECORD_DIR, `${streamKey}-${Date.now()}.mp4`);
+  const streamPath = path.join(RECORD_DIR, streamKey);
+  if (!fs.existsSync(streamPath)) {
+    fs.mkdirSync(streamPath, { recursive: true });
+  }
+  
+  const filePath = path.join(streamPath, "index.m3u8");
+
   const ffmpeg = spawn("ffmpeg", [
     "-i",
     `rtmp://localhost/live/${streamKey}`, // RTMP Stream URL
@@ -72,7 +73,13 @@ const startRecording = (streamKey) => {
     "-strict",
     "experimental",
     "-f",
-    "mp4",
+    "hls",
+    "-hls_time",
+    "2",
+    "-hls_list_size",
+    "4",
+    "-hls_flags",
+    "delete_segments",
     filePath,
   ]);
 
@@ -84,7 +91,7 @@ const startRecording = (streamKey) => {
 
   ffmpeg.on("close", (code) => {
     console.log(`FFmpeg process exited with code ${code}`);
-    delete activeRecordings[streamKey]; // Remove from active recordings
+    delete activeRecordings[streamKey];
   });
 
   return filePath;
@@ -107,15 +114,13 @@ app.post("/api/start-recording", (req, res) => {
 app.post("/api/stop-recording", (req, res) => {
   const { streamKey } = req.body;
   if (!streamKey || !activeRecordings[streamKey]) {
-    return res
-      .status(400)
-      .json({ error: "Invalid stream key or not recording" });
+    return res.status(400).json({ error: "Invalid stream key or not recording" });
   }
-  activeRecordings[streamKey].kill("SIGINT"); // Stop FFmpeg process
+  activeRecordings[streamKey].kill("SIGINT");
   res.json({ message: "Recording stopped" });
 });
 
-// API to list recorded videos
+// API to list recorded HLS videos
 app.get("/api/videos", (req, res) => {
   fs.readdir(RECORD_DIR, (err, files) => {
     if (err) {
@@ -125,25 +130,8 @@ app.get("/api/videos", (req, res) => {
   });
 });
 
-//Chat socket.io
-
-// Create HTTP server and attach Socket.IO
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: "http://localhost:5173",
-  },
-});
-
 // Start HTTP server
+const httpServer = createServer(app);
 httpServer.listen(port, () => {
   console.log(`API server running at http://localhost:${port}`);
-});
-
-io.on("connection", (socket) => {
-  socket.on("hello", () => {
-    console.log('hello');
-    
-    socket.emit("hai");
-  });
 });

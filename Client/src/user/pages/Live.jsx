@@ -1,79 +1,58 @@
-// import React, { useRef, useEffect } from 'react';
-// import flv from 'flv.js';
-
-// const VideoPlayer = ({ streamKey }) => {
-//   const videoRef = useRef(null);
-
-//   useEffect(() => {
-//     if (flv.isSupported()) {
-//       const player = flv.createPlayer({
-//         type: 'flv',
-//         url: `http://localhost:8000/live/${streamKey}.flv`,
-//       });
-//       player.attachMediaElement(videoRef.current);
-//       player.load();
-//     }
-//   }, [streamKey]);
-
-//   return <video ref={videoRef} controls />;
-// };
-
-// export default VideoPlayer;
-
-
-
 import React, { useRef, useEffect, useState } from "react";
-import flv from "flv.js";
+import Hls from "hls.js";
 
 const VideoPlayer = ({ streamKey }) => {
   const videoRef = useRef(null);
-  const [resolution, setResolution] = useState("Starting soon...");
+  const [resolution, setResolution] = useState("Loading...");
   const [isBehind, setIsBehind] = useState(false);
-  let player = null;
 
   useEffect(() => {
-    if (flv.isSupported()) {
-      player = flv.createPlayer({
-        type: "flv",
-        url: `http://localhost:8000/live/${streamKey}.flv`,
-        isLive: true,
+    const video = videoRef.current;
+    const streamURL = `http://localhost:8000/live/${streamKey}/index.m3u8`;
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(streamURL);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play().catch((err) => console.error("Playback error:", err));
       });
-
-      player.attachMediaElement(videoRef.current);
-      player.load();
-      player.play().catch((err) => console.error("Playback error:", err));
-
-      // Set resolution once video metadata is loaded
-      videoRef.current.addEventListener("loadedmetadata", () => {
-        setResolution(`${videoRef.current.videoWidth}x${videoRef.current.videoHeight}`);
-      });
-
-      // Check if the user is behind live
-      const checkLiveStatus = () => {
-        if (videoRef.current.seekable.length > 0) {
-          const liveEdge = videoRef.current.seekable.end(0);
-          setIsBehind(videoRef.current.currentTime < liveEdge - 3);
+      hls.on(Hls.Events.LEVEL_SWITCHED, (_, data) => {
+        const level = hls.levels[data.level];
+        if (level && level.width && level.height) {
+          setResolution(`${level.width}x${level.height}`);
         }
+      });
+
+      return () => {
+        hls.destroy();
       };
-      videoRef.current.addEventListener("timeupdate", checkLiveStatus);
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = streamURL;
+      video.addEventListener("loadedmetadata", () => {
+        video.play().catch((err) => console.error("Playback error:", err));
+        setResolution(`${video.videoWidth}x${video.videoHeight}`);
+      });
     }
 
-    return () => {
-      if (player) {
-        player.destroy();
+    const checkLiveStatus = () => {
+      if (video.seekable.length > 0) {
+        const liveEdge = video.seekable.end(0);
+        setIsBehind(video.currentTime < liveEdge - 3);
       }
+    };
+
+    video.addEventListener("timeupdate", checkLiveStatus);
+
+    return () => {
+      video.removeEventListener("timeupdate", checkLiveStatus);
     };
   }, [streamKey]);
 
-  // Jump to the latest live position
   const jumpToLive = () => {
-    console.log("Jump to live triggered");
     if (videoRef.current && videoRef.current.seekable.length > 0) {
       const liveEdge = videoRef.current.seekable.end(0);
-      console.log("Live edge:", liveEdge);
       videoRef.current.currentTime = liveEdge;
-    } else {
-      console.log("Video ref or seekable range not available");
     }
   };
 
@@ -120,5 +99,3 @@ const VideoPlayer = ({ streamKey }) => {
 };
 
 export default VideoPlayer;
-
-

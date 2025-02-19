@@ -13,4 +13,5 @@
 .subContainer {
     overflow-y: scroll;
     height: 85vh;
+    padding-left: 15px ;
 }
